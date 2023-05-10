@@ -1,7 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:checkofficer/models/guest_model.dart';
 import 'package:checkofficer/models/objective_model.dart';
 import 'package:checkofficer/models/province_model.dart';
@@ -13,6 +16,32 @@ import 'package:image_picker/image_picker.dart';
 
 class AppService {
   AppController appController = Get.put(AppController());
+
+  Future<void> processPrint({required String name, required String phone}) async {
+    await BluetoothThermalPrinter.writeText('$name\n$phone\n\n\n');
+  }
+
+  Future<void> processChoosePrinter({required String printerName}) async {
+    print('printName ---> $printerName');
+    var macs = printerName.split('#');
+    print('mas.last----> ${macs.last}');
+    await BluetoothThermalPrinter.connect(macs.last).then((value) {
+      print('value at processChoosePrinter ---> $value');
+      if (value.toString() == 'true') {
+        appController.connectedPrinter.value = true;
+      }
+    }).catchError((onError) {
+      print('onError ----> $onError');
+    });
+  }
+
+  Future<void> proccessGetBluetooth() async {
+    await BluetoothThermalPrinter.getBluetooths.then((value) {
+      if (value != null) {
+        appController.availableBluetoothDevices.addAll(value);
+      }
+    });
+  }
 
   Future<void> readAllGuest() async {
     String urlApi =

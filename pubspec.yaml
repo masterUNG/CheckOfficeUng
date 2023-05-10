@@ -38,6 +38,11 @@ dependencies:
   get: ^4.6.5
   dio: ^5.1.1
   image_picker: ^0.8.7+4
+  intl: ^0.18.1
+  esc_pos_utils: ^1.1.0
+  bluetooth_print: ^4.3.0
+  image: ^3.3.0
+  bluetooth_thermal_printer: ^0.0.6
 
 dev_dependencies:
   flutter_test:

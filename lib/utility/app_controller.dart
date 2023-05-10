@@ -14,6 +14,8 @@ class AppController extends GetxController {
   RxList<File> avatarFiles = <File>[].obs;
   RxList<File> carFiles = <File>[].obs;
   RxList<File> cardFiles = <File>[].obs;
-
   RxList<GuestModel> guestModels = <GuestModel>[].obs;
+
+  RxBool connectedPrinter = false.obs;
+  RxList<dynamic> availableBluetoothDevices = <dynamic>[].obs;
 }
