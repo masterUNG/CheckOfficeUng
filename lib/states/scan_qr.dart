@@ -1,4 +1,6 @@
+import 'package:checkofficer/states/detail_after_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:scan/scan.dart';
 
 class ScanQr extends StatefulWidget {
@@ -30,6 +32,7 @@ class _ScanQrState extends State<ScanQr> {
         controller: scanController,
         onCapture: (data) {
           print('data ---> $data');
+          Get.offAll(DetailAfterScan(qr: data));
         },
       ),
     );

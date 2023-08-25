@@ -12,7 +12,7 @@ class GuestModel {
   final String urlImage2;
   final String urlImage3;
   final String checkIn;
-  final String chickOut;
+  final String checkOut;
 
 
   GuestModel({
@@ -26,7 +26,7 @@ class GuestModel {
     required this.urlImage2,
     required this.urlImage3,
     required this.checkIn,
-    required this.chickOut,
+    required this.checkOut,
   });
 
 
@@ -42,7 +42,7 @@ class GuestModel {
       'urlImage2': urlImage2,
       'urlImage3': urlImage3,
       'checkIn': checkIn,
-      'chickOut': chickOut,
+      'checkOut': checkOut,
     };
   }
 
@@ -58,7 +58,7 @@ class GuestModel {
       urlImage2: (map['urlImage2'] ?? '') as String,
       urlImage3: (map['urlImage3'] ?? '') as String,
       checkIn: (map['checkIn'] ?? '') as String,
-      chickOut: (map['chickOut'] ?? '') as String,
+      checkOut: (map['checkOut'] ?? '') as String,
     );
   }
 
