@@ -43,6 +43,8 @@ dependencies:
   bluetooth_print: ^4.3.0
   image: ^3.3.0
   bluetooth_thermal_printer: ^0.0.6
+  scan: ^1.6.0
+  
 
 dev_dependencies:
   flutter_test:

@@ -92,7 +92,7 @@ class AppService {
 
     if (urlImages.isNotEmpty) {
       String urlApiInsertGuest =
-          'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/insertGuest.php?isAdd=true&nameAndSur=$nameAndSurname&phone=$phone&carId=$carId&province=$province&objective=$objective&urlImage1=${urlImages[0]}&urlImage2=${urlImages[1]}&urlImage3=${urlImages[2]}';
+          'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/insertGuest.php?isAdd=true&nameAndSur=$nameAndSurname&phone=$phone&carId=$carId&province=$province&objective=$objective&urlImage1=${urlImages[0]}&urlImage2=${urlImages[1]}&urlImage3=${urlImages[2]}&checkIn=${DateTime.now().toString()}';
       await dio.Dio().get(urlApiInsertGuest).then((value) {
         Get.back();
         AppSnackBar(

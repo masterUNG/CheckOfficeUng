@@ -1,4 +1,6 @@
 import 'package:checkofficer/states/add_guest.dart';
+import 'package:checkofficer/states/detail.dart';
+import 'package:checkofficer/states/scan_qr.dart';
 import 'package:checkofficer/states/setting.dart';
 import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/utility/app_controller.dart';
@@ -8,7 +10,6 @@ import 'package:checkofficer/widgets/widget_button.dart';
 import 'package:checkofficer/widgets/widget_icon_button.dart';
 import 'package:checkofficer/widgets/widget_image_network.dart';
 import 'package:checkofficer/widgets/widget_text.dart';
-import 'package:checkofficer/widgets/widget_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,6 +42,12 @@ class _ListGuestState extends State<ListGuest> {
               title: const WidgetText(data: 'List Guest'),
               centerTitle: true,
               actions: [
+                WidgetIconButton(
+                  iconData: Icons.qr_code,
+                  pressFunc: () async {
+                    Get.to(const ScanQr());
+                  },
+                ),
                 WidgetIconButton(
                   iconData: Icons.print,
                   color: appController.connectedPrinter.value
@@ -95,49 +102,59 @@ class _ListGuestState extends State<ListGuest> {
                 ? const SizedBox()
                 : ListView.builder(
                     itemCount: appController.guestModels.length,
-                    itemBuilder: (context, index) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: AppConstant().borderBox(),
-                          margin: const EdgeInsets.all(8.0),
-                          child: WidgetImageNetwork(
-                            urlImage:
-                                appController.guestModels[index].urlImage1,
-                            width: 180,
-                            height: 150,
-                          ),
-                        ),
-                        Column(
+                    itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        Get.to(Detail(
+                            guestModel: appController.guestModels[index]));
+                      },
+                      child: Card(
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            WidgetText(
-                                data: appController
-                                    .guestModels[index].nameAndSur),
-                            WidgetText(
-                                data: appController.guestModels[index].carId),
-                            WidgetText(
-                                data:
-                                    appController.guestModels[index].province),
-                            WidgetText(
-                                data:
-                                    appController.guestModels[index].objective),
-                            appController.connectedPrinter.value
-                                ? WidgetButton(
-                                    label: 'Print',
-                                    pressFunc: () {
-                                      print('print');
-                                      AppService().processPrint(
-                                          name: appController
-                                              .guestModels[index].nameAndSur,
-                                          phone: appController
-                                              .guestModels[index].phone);
-                                    },
-                                  )
-                                : const SizedBox(),
+                            Container(
+                              decoration: AppConstant().borderBox(),
+                              margin: const EdgeInsets.all(8.0),
+                              child: WidgetImageNetwork(
+                                urlImage:
+                                    appController.guestModels[index].urlImage1,
+                                width: 180,
+                                height: 150,
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                WidgetText(
+                                    data: appController
+                                        .guestModels[index].nameAndSur),
+                                WidgetText(
+                                    data:
+                                        appController.guestModels[index].carId),
+                                WidgetText(
+                                    data: appController
+                                        .guestModels[index].province),
+                                WidgetText(
+                                    data: appController
+                                        .guestModels[index].objective),
+                                appController.connectedPrinter.value
+                                    ? WidgetButton(
+                                        label: 'Print',
+                                        pressFunc: () {
+                                          print('print');
+                                          AppService().processPrint(
+                                              name: appController
+                                                  .guestModels[index]
+                                                  .nameAndSur,
+                                              phone: appController
+                                                  .guestModels[index].phone);
+                                        },
+                                      )
+                                    : const SizedBox(),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
           );
