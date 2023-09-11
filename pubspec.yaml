@@ -44,6 +44,8 @@ dependencies:
   image: ^3.3.0
   bluetooth_thermal_printer: ^0.0.6
   scan: ^1.6.0
+  screenshot: ^2.1.0
+  
   
 
 dev_dependencies:

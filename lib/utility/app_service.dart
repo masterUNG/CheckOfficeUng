@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
+
 import 'dart:io';
 import 'dart:math';
 
@@ -8,13 +9,20 @@ import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:checkofficer/models/guest_model.dart';
 import 'package:checkofficer/models/objective_model.dart';
 import 'package:checkofficer/models/province_model.dart';
+import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/utility/app_controller.dart';
 import 'package:checkofficer/utility/app_snackbar.dart';
+import 'package:checkofficer/widgets/widget_image.dart';
+import 'package:checkofficer/widgets/widget_text.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart';
+
+import 'package:image/image.dart' as image;
+
 import 'package:image_picker/image_picker.dart';
+import 'package:screenshot/screenshot.dart';
 
 class AppService {
   AppController appController = Get.put(AppController());
@@ -29,10 +37,23 @@ class AppService {
     var generator = Generator(PaperSize.mm80, profile);
 
     List<int> bytes = <int>[];
-    bytes += generator.text('Doramon');
-    bytes += generator.qrcode('I love doramon');
 
-    await BluetoothThermalPrinter.writeBytes(bytes);
+    ScreenshotController screenshotController = ScreenshotController();
+    screenshotController
+        .captureFromWidget(
+      WidgetText(
+        data: 'มาสเตอร์ อึ่ง',
+        textStyle: AppConstant().h2Style(color: Colors.black),
+      ),
+    )
+        .then((value) async {
+      final myImage = image.decodeImage(value);
+      bytes += generator.text('Doramon');
+      // bytes += generator.imageRaster(myImage!);
+      bytes += generator.image(myImage!);
+
+      await BluetoothThermalPrinter.writeBytes(bytes);
+    });
   }
 
   Future<void> processChoosePrinter({required String printerName}) async {
