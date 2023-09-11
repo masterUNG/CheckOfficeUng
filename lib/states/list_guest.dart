@@ -34,7 +34,7 @@ class _ListGuestState extends State<ListGuest> {
         init: AppController(),
         builder: (AppController appController) {
           print(
-              'availableBluetooth ----> ${appController.availableBluetoothDevices.length}');
+              '###  availableBluetooth ----> ${appController.availableBluetoothDevices.length}');
           print('connectedPrinter ---> ${appController.connectedPrinter}');
           return Scaffold(
             backgroundColor: Colors.white,
@@ -58,25 +58,23 @@ class _ListGuestState extends State<ListGuest> {
                       title: 'Connected Printer',
                       contentWidget: appController
                               .availableBluetoothDevices.isEmpty
-                          ? const SizedBox()
-                          : SizedBox(
-                              height: 50,
-                              child: ListView.builder(
-                                itemCount: appController
-                                    .availableBluetoothDevices.length,
-                                itemBuilder: (context, index) => WidgetButton(
-                                  label: appController
-                                      .availableBluetoothDevices[index]
-                                      .toString(),
-                                  pressFunc: () {
-                                    AppService()
-                                        .processChoosePrinter(
-                                            printerName: appController
-                                                    .availableBluetoothDevices[
-                                                index])
-                                        .then((value) => Get.back());
-                                  },
-                                ),
+                          ? const WidgetText(data: 'ไม่มี Printer')
+                          : ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: appController
+                                  .availableBluetoothDevices.length,
+                              itemBuilder: (context, index) => WidgetButton(
+                                label: appController
+                                    .availableBluetoothDevices[index]
+                                    .toString(),
+                                pressFunc: () {
+                                  AppService()
+                                      .processChoosePrinter(
+                                          printerName: appController
+                                              .availableBluetoothDevices[index])
+                                      .then((value) => Get.back());
+                                },
                               ),
                             ),
                     );
@@ -141,12 +139,13 @@ class _ListGuestState extends State<ListGuest> {
                                         label: 'Print',
                                         pressFunc: () {
                                           print('print');
-                                          AppService().processPrint(
-                                              name: appController
-                                                  .guestModels[index]
-                                                  .nameAndSur,
-                                              phone: appController
-                                                  .guestModels[index].phone);
+                                          // AppService().processPrint(
+                                          //     name: appController
+                                          //         .guestModels[index]
+                                          //         .nameAndSur,
+                                          //     phone: appController
+                                          //         .guestModels[index].phone);
+                                          AppService().processPrintImage();
                                         },
                                       )
                                     : const SizedBox(),

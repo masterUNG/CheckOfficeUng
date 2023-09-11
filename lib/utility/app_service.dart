@@ -11,15 +11,28 @@ import 'package:checkofficer/models/province_model.dart';
 import 'package:checkofficer/utility/app_controller.dart';
 import 'package:checkofficer/utility/app_snackbar.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AppService {
-
   AppController appController = Get.put(AppController());
 
-  Future<void> processPrint({required String name, required String phone}) async {
-    await BluetoothThermalPrinter.writeText('Test Print $name\n$phone\n\n\n');
+  Future<void> processPrint(
+      {required String name, required String phone}) async {
+    await BluetoothThermalPrinter.writeText('Test Print\n$name\n$phone\n\n\n');
+  }
+
+  Future<void> processPrintImage() async {
+    CapabilityProfile profile = await CapabilityProfile.load();
+    var generator = Generator(PaperSize.mm80, profile);
+
+    List<int> bytes = <int>[];
+    bytes += generator.text('Doramon');
+    bytes += generator.qrcode('I love doramon');
+
+    await BluetoothThermalPrinter.writeBytes(bytes);
   }
 
   Future<void> processChoosePrinter({required String printerName}) async {

@@ -21,6 +21,7 @@ class AppDialog {
             pressFunc: () => Get.back(),
           )
         ],
+        scrollable: true,
       ),
     );
   }
