@@ -15,10 +15,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AppService {
+
   AppController appController = Get.put(AppController());
 
   Future<void> processPrint({required String name, required String phone}) async {
-    await BluetoothThermalPrinter.writeText('$name\n$phone\n\n\n');
+    await BluetoothThermalPrinter.writeText('Test Print $name\n$phone\n\n\n');
   }
 
   Future<void> processChoosePrinter({required String printerName}) async {
