@@ -48,44 +48,6 @@ class _ListGuestState extends State<ListGuest> {
                     Get.to(const ScanQr());
                   },
                 ),
-                WidgetIconButton(
-                  iconData: Icons.print,
-                  color: appController.connectedPrinter.value
-                      ? Colors.green
-                      : Colors.red,
-                  pressFunc: () {
-                    AppDialog(context: context).normalDialog(
-                      title: 'Connected Printer',
-                      contentWidget: appController
-                              .availableBluetoothDevices.isEmpty
-                          ? const WidgetText(data: 'ไม่มี Printer')
-                          : ListView.builder(
-                              physics: ScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: appController
-                                  .availableBluetoothDevices.length,
-                              itemBuilder: (context, index) => WidgetButton(
-                                label: appController
-                                    .availableBluetoothDevices[index]
-                                    .toString(),
-                                pressFunc: () {
-                                  AppService()
-                                      .processChoosePrinter(
-                                          printerName: appController
-                                              .availableBluetoothDevices[index])
-                                      .then((value) => Get.back());
-                                },
-                              ),
-                            ),
-                    );
-                  },
-                ),
-                WidgetIconButton(
-                  iconData: Icons.settings,
-                  pressFunc: () {
-                    Get.to(const Setting());
-                  },
-                )
               ],
             ),
             floatingActionButton: WidgetButton(
@@ -115,41 +77,30 @@ class _ListGuestState extends State<ListGuest> {
                               child: WidgetImageNetwork(
                                 urlImage:
                                     appController.guestModels[index].urlImage1,
-                                width: 180,
+                                width: 150,
                                 height: 150,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                WidgetText(
-                                    data: appController
-                                        .guestModels[index].nameAndSur),
-                                WidgetText(
-                                    data:
-                                        appController.guestModels[index].carId),
-                                WidgetText(
-                                    data: appController
-                                        .guestModels[index].province),
-                                WidgetText(
-                                    data: appController
-                                        .guestModels[index].objective),
-                                appController.connectedPrinter.value
-                                    ? WidgetButton(
-                                        label: 'Print',
-                                        pressFunc: () {
-                                          print('print');
-                                          // AppService().processPrint(
-                                          //     name: appController
-                                          //         .guestModels[index]
-                                          //         .nameAndSur,
-                                          //     phone: appController
-                                          //         .guestModels[index].phone);
-                                          AppService().processPrintImage();
-                                        },
-                                      )
-                                    : const SizedBox(),
-                              ],
+                            Container(
+                              width: 180,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  WidgetText(
+                                      data: appController
+                                          .guestModels[index].nameAndSur),
+                                  WidgetText(
+                                      data: appController
+                                          .guestModels[index].carId),
+                                  WidgetText(
+                                      data: appController
+                                          .guestModels[index].province),
+                                  WidgetText(
+                                      data: appController
+                                          .guestModels[index].objective),
+                                  
+                                ],
+                              ),
                             ),
                           ],
                         ),

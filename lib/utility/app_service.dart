@@ -32,7 +32,7 @@ class AppService {
     await BluetoothThermalPrinter.writeText('Test Print\n$name\n$phone\n\n\n');
   }
 
-  Future<void> processPrintImage() async {
+  Future<void> processPrintImage({required GuestModel guestModel}) async {
     CapabilityProfile profile = await CapabilityProfile.load();
     var generator = Generator(PaperSize.mm80, profile);
 
@@ -41,15 +41,47 @@ class AppService {
     ScreenshotController screenshotController = ScreenshotController();
     screenshotController
         .captureFromWidget(
-      WidgetText(
-        data: 'มาสเตอร์ อึ่ง',
-        textStyle: AppConstant().h2Style(color: Colors.black),
+      SizedBox(
+        width: 100,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            WidgetText(
+              data: 'รายละเอียดข้อมูลการติดต่อ',
+              textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+            ),
+            WidgetText(
+              data: 'ทะเบียนรถ : ${guestModel.carId}',
+              textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+            ),
+            WidgetText(
+              data: 'จังหวัด : ${guestModel.province}',
+              textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+            ),
+            WidgetText(
+              data: 'ข้อมูลการติดต่อ : ${guestModel.objective}',
+              textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+            ),
+            WidgetText(
+              data: 'เวลาเข้า : ${guestModel.checkIn}',
+              textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+            ),
+            Container(
+              width: 80,
+              height: 40,
+              alignment: Alignment.center,decoration: BoxDecoration(border: Border.all()),
+              child: WidgetText(
+                data: 'ตราประทับ',
+                textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+              ),
+            ),
+          ],
+        ),
       ),
     )
         .then((value) async {
       final myImage = image.decodeImage(value);
-      bytes += generator.text('Doramon');
-      // bytes += generator.imageRaster(myImage!);
       bytes += generator.image(myImage!);
 
       await BluetoothThermalPrinter.writeBytes(bytes);
