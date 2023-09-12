@@ -48,6 +48,7 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+
       body: Column(
         children: [
           choosePrinter(),

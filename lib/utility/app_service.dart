@@ -68,9 +68,11 @@ class AppService {
               textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
             ),
             Container(
-              width: 80,
-              height: 40,
-              alignment: Alignment.center,decoration: BoxDecoration(border: Border.all()),
+              margin: const EdgeInsets.symmetric(vertical: 16),
+              width: 120,
+              height: 80,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(border: Border.all()),
               child: WidgetText(
                 data: 'ตราประทับ',
                 textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
@@ -83,6 +85,10 @@ class AppService {
         .then((value) async {
       final myImage = image.decodeImage(value);
       bytes += generator.image(myImage!);
+
+      bytes += generator.qrcode(guestModel.id);
+
+      bytes += generator.text('\n\n Remark: \n\n\n');
 
       await BluetoothThermalPrinter.writeBytes(bytes);
     });
