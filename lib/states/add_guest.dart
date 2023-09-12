@@ -251,48 +251,23 @@ class _AddGuestState extends State<AddGuest> {
   }
 
   void processSave() {
-    if (controller.avatarFiles.isEmpty) {
-      AppSnackBar(title: 'Image Avatar ?', message: 'กรุณาถ่ายภาพ Avatar')
-          .errorSnackBar();
-    } else if (controller.carFiles.isEmpty) {
-      AppSnackBar(title: 'Image Car ?', message: 'กรุณาถ่ายภาพ Car')
-          .errorSnackBar();
-    } else if (controller.cardFiles.isEmpty) {
+    if (controller.cardFiles.isEmpty) {
       AppSnackBar(title: 'Image Card ?', message: 'กรุณาถ่ายภาพ Card')
           .errorSnackBar();
-    } else if ((nameAndSurname?.isEmpty ?? true) ||
-        (carId?.isEmpty ?? true) ||
-        (phone?.isEmpty ?? true)) {
-      AppSnackBar(title: 'Have Space ?', message: 'กรุณากรอกทุกช่อง คะ')
+    } else if ((carId?.isEmpty ?? true)) {
+      AppSnackBar(title: 'ทะเบียนรถ ?', message: 'กรุณาทะเบียนรถ คะ')
           .errorSnackBar();
     } else if (controller.chooseProvinces.last == null) {
       AppSnackBar(title: 'จังหวัด ?', message: 'กรุณาเลือก จังหวัดด้วย คะ')
           .errorSnackBar();
-    } else if (controller.chooseObjectives.isEmpty) {
-      AppSnackBar(
-              title: 'จุดประสงค์ ?', message: 'กรุณาเลือก จุดประสงค์ด้วย คะ')
-          .errorSnackBar();
-    } else if (controller.chooseObjectives.last == 'อื่นๆ') {
-      if (otherObjective?.isEmpty ?? true) {
-        AppSnackBar(title: 'อื่นๆ ?', message: 'กรุณากรอก อื่นๆ ด้วย คะ')
-            .errorSnackBar();
-      } else {
-        //process Insert
-         AppService().processAddGuest(
-          nameAndSurname: nameAndSurname!,
-          phone: phone!,
-          carId: carId!,
-          province: controller.chooseProvinces.last!,
-          objective: otherObjective!);
-      }
-    } else {
+    }  else {
       //process Insert
       AppService().processAddGuest(
-          nameAndSurname: nameAndSurname!,
-          phone: phone!,
+          nameAndSurname: nameAndSurname ?? '',
+          phone: phone ?? '',
           carId: carId!,
           province: controller.chooseProvinces.last!,
-          objective: controller.chooseObjectives.last!);
+          objective: controller.chooseObjectives.isEmpty ? '' : controller.chooseObjectives.last! );
     }
   }
 }

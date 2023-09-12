@@ -142,11 +142,21 @@ class AppService {
         'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/saveFile.php';
 
     var files = <File>[];
-    files.add(appController.avatarFiles.last);
-    files.add(appController.carFiles.last);
-    files.add(appController.carFiles.last);
+    if (appController.avatarFiles.isNotEmpty) {
+      files.add(appController.avatarFiles.last);
+    }
 
-    var urlImages = <String>[];
+    if (appController.carFiles.isNotEmpty) {
+      files.add(appController.carFiles.last);
+    }
+
+    files.add(appController.cardFiles.last);
+
+    var urlImages = <String>[
+      '',
+      '',
+      '',
+    ];
     int index = 0;
 
     for (var element in files) {
@@ -157,8 +167,10 @@ class AppService {
       dio.FormData formData = dio.FormData.fromMap(map);
       await dio.Dio().post(urlApiUpload, data: formData).then((value) {
         print('upload $nameFile success');
-        urlImages.add(
-            'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile');
+        // urlImages.add(
+        //     'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile');
+        urlImages[index] =
+            'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile';
       });
       index++;
     }
