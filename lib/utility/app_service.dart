@@ -12,7 +12,6 @@ import 'package:checkofficer/models/province_model.dart';
 import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/utility/app_controller.dart';
 import 'package:checkofficer/utility/app_snackbar.dart';
-import 'package:checkofficer/widgets/widget_image.dart';
 import 'package:checkofficer/widgets/widget_text.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:esc_pos_utils/esc_pos_utils.dart';
@@ -95,6 +94,7 @@ class AppService {
   }
 
   Future<void> processChoosePrinter({required String printerName}) async {
+
     print('printName ---> $printerName');
     var macs = printerName.split('#');
     print('mas.last----> ${macs.last}');
