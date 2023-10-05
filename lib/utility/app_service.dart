@@ -46,6 +46,10 @@ class AppService {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            const ImageIcon(
+              AssetImage('images/dfend.png'),
+              size: 96,
+            ),
             WidgetText(
               data: 'รายละเอียดข้อมูลการติดต่อ',
               textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
@@ -94,7 +98,6 @@ class AppService {
   }
 
   Future<void> processChoosePrinter({required String printerName}) async {
-
     print('printName ---> $printerName');
     var macs = printerName.split('#');
     print('mas.last----> ${macs.last}');

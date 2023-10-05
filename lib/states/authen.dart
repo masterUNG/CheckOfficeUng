@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:checkofficer/models/user_model.dart';
@@ -35,18 +37,9 @@ class _AuthenState extends State<Authen> {
                 Container(
                   width: 250,
                   margin: const EdgeInsets.only(top: 64),
-                  child: Row(
-                    children: [
-                      const WidgetImage(
-                        width: 50,
-                        height: 50,
-                      ),
-                      WidgetText(
-                        data: 'Check Officer',
-                        textStyle: AppConstant()
-                            .h2Style(color: Colors.white, size: 25),
-                      )
-                    ],
+                  child: const WidgetImage(pathImage: 'images/logo_tswg.png',
+                    // width: 50,
+                    // height: 50,
                   ),
                 ),
               ],
@@ -56,7 +49,7 @@ class _AuthenState extends State<Authen> {
               children: [
                 WidgetForm(
                   hint: 'User :',
-                  suffixWidget: Icon(Icons.person_outline),
+                  suffixWidget: const Icon(Icons.person_outline),
                   changeFunc: (p0) {
                     user = p0.trim();
                   },
@@ -68,7 +61,7 @@ class _AuthenState extends State<Authen> {
               children: [
                 WidgetForm(
                   hint: 'Password :',
-                  suffixWidget: Icon(Icons.lock_outline),
+                  suffixWidget: const Icon(Icons.lock_outline),
                   changeFunc: (p0) {
                     password = p0.trim();
                   },

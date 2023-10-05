@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppConstant {
-  static Color bgColor = Color.fromARGB(255, 96, 22, 215);
+  static Color bgColor = const Color.fromARGB(255, 96, 22, 215);
 
   BoxDecoration borderBox() => BoxDecoration(
         border: Border.all(),

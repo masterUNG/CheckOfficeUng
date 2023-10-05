@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:checkofficer/models/guest_model.dart';
 import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/widgets/widget_image.dart';
-import 'package:checkofficer/widgets/widget_image_network.dart';
 import 'package:checkofficer/widgets/widget_text.dart';
 import 'package:get/get.dart';
 
@@ -74,18 +73,18 @@ class _DetailAfterScanState extends State<DetailAfterScan> {
       ),
       body: guestModel == null
           ? const SizedBox()
-          : Container(
+          : SizedBox(
               width: double.infinity,
               height: double.infinity,
               child: ListView(
                 children: [
                   Column(
                     children: [
-                      WidgetImage(
+                      const WidgetImage(
                         pathImage: 'images/dfend.png',
                         width: 250,
                       ),
-                      WidgetText(data: 'รายละเอียดข้อมูลการติดต่อ'),
+                      const WidgetText(data: 'รายละเอียดข้อมูลการติดต่อ'),
                       WidgetText(data: 'ทะเบียนรถ : ${guestModel!.carId}'),
                       WidgetText(data: 'จังหวัด : ${guestModel!.province}'),
                       WidgetText(
@@ -94,7 +93,7 @@ class _DetailAfterScanState extends State<DetailAfterScan> {
                       WidgetText(data: 'เวลาออก : ${guestModel!.checkOut}'),
                       Container(
                         margin: const EdgeInsets.only(top: 16, bottom: 64),
-                        child: WidgetText(data: 'Title : ข้อมูลปิดท้ายสลิป'),
+                        child: const WidgetText(data: 'Title : ข้อมูลปิดท้ายสลิป'),
                       ),
                     ],
                   ),

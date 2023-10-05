@@ -35,7 +35,7 @@ class WidgetForm extends StatelessWidget {
           suffixIcon: suffixWidget,
           hintText: hint,
           filled: true,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

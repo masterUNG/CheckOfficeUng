@@ -1,10 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:checkofficer/states/add_guest.dart';
 import 'package:checkofficer/states/detail.dart';
 import 'package:checkofficer/states/scan_qr.dart';
-import 'package:checkofficer/states/setting.dart';
 import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/utility/app_controller.dart';
-import 'package:checkofficer/utility/app_dialog.dart';
 import 'package:checkofficer/utility/app_service.dart';
 import 'package:checkofficer/widgets/widget_button.dart';
 import 'package:checkofficer/widgets/widget_icon_button.dart';
@@ -64,6 +64,8 @@ class _ListGuestState extends State<ListGuest> {
                     itemCount: appController.guestModels.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () {
+                        print(
+                            'detail ---> ${appController.guestModels[index].toMap()}');
                         Get.to(Detail(
                             guestModel: appController.guestModels[index]));
                       },
@@ -81,7 +83,7 @@ class _ListGuestState extends State<ListGuest> {
                                 height: 150,
                               ),
                             ),
-                            Container(
+                            SizedBox(
                               width: 180,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +100,6 @@ class _ListGuestState extends State<ListGuest> {
                                   WidgetText(
                                       data: appController
                                           .guestModels[index].objective),
-                                  
                                 ],
                               ),
                             ),

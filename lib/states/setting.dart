@@ -1,6 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:checkofficer/widgets/widget_button.dart';
-import 'package:checkofficer/widgets/widget_text.dart';
 import 'package:checkofficer/widgets/widget_text_button.dart';
 import 'package:flutter/material.dart';
 

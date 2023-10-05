@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, sort_child_properties_last
+
 import 'package:checkofficer/utility/app_constant.dart';
 import 'package:checkofficer/utility/app_controller.dart';
 import 'package:checkofficer/utility/app_service.dart';
