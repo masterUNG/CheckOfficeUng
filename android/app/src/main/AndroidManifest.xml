@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.masterung.checkofficer">
+    package="com.masterung.checkofficer2">
     <uses-permission android:name="android.permission.BLUETOOTH" />  
 	 <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
      <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
