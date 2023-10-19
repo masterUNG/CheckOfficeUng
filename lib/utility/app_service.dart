@@ -70,16 +70,19 @@ class AppService {
               data: 'เวลาเข้า : ${guestModel.checkIn}',
               textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
             ),
-
-            WidgetText(data: 'หมายเหตุ'),
+            Divider(),
+            Divider(),
+            WidgetText(
+              data: 'หมายเหตุ',
+              textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
+            ),
             Divider(),
             Divider(),
             Divider(),
+            Divider(
+              color: Colors.black,
+            ),
             Divider(),
-
-
-
-
             Container(
               margin: const EdgeInsets.symmetric(vertical: 16),
               width: 120,
@@ -103,8 +106,6 @@ class AppService {
 
       bytes += generator.text('\n\n\n\n\n');
 
-     
-
       await BluetoothThermalPrinter.writeBytes(bytes);
     });
   }
@@ -113,14 +114,16 @@ class AppService {
     print('printName ---> $printerName');
     var macs = printerName.split('#');
     print('mas.last----> ${macs.last}');
-    await BluetoothThermalPrinter.connect(macs.last).then((value) {
-      print('value at processChoosePrinter ---> $value');
-      if (value.toString() == 'true') {
-        appController.connectedPrinter.value = true;
-      }
-    }).catchError((onError) {
-      print('onError ----> $onError');
-    });
+    try {
+      await BluetoothThermalPrinter.connect(macs.last).then((value) {
+        print('value at processChoosePrinter ---> $value');
+        if (value.toString() == 'true') {
+          appController.connectedPrinter.value = true;
+        }
+      });
+    } on Exception catch (e) {
+      print('onError -----> $e');
+    }
   }
 
   Future<void> proccessGetBluetooth() async {
@@ -132,8 +135,7 @@ class AppService {
   }
 
   Future<void> readAllGuest() async {
-    String urlApi =
-        'https://tswg.site/app/getAllGuest.php';
+    String urlApi = 'https://tswg.site/app/getAllGuest.php';
 
     if (appController.guestModels.isNotEmpty) {
       appController.guestModels.clear();
@@ -153,8 +155,7 @@ class AppService {
       required String carId,
       required String province,
       required String objective}) async {
-    String urlApiUpload =
-        'https://tswg.site/app/saveFile.php';
+    String urlApiUpload = 'https://tswg.site/app/saveFile.php';
 
     var files = <File>[];
     if (appController.avatarFiles.isNotEmpty) {
@@ -184,10 +185,9 @@ class AppService {
         print('upload $nameFile success');
         // urlImages.add(
         //     'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile');
-        urlImages[index] =
-            'https://tswg.site/app/image/$nameFile';
+        urlImages[index] = 'https://tswg.site/app/image/$nameFile';
       });
-      index++;
+      index++;  
     }
 
     if (urlImages.isNotEmpty) {
@@ -210,8 +210,7 @@ class AppService {
   }
 
   Future<void> readAllObjective() async {
-    String urlApi =
-        'https://tswg.site/app/getAllObjectiveUng.php';
+    String urlApi = 'https://tswg.site/app/getAllObjectiveUng.php';
     await dio.Dio().get(urlApi).then((value) {
       for (var element in json.decode(value.data)) {
         ObjectiveModel model = ObjectiveModel.fromMap(element);

@@ -18,10 +18,14 @@ class AppDialog {
         actions: [
           WidgetTextButton(
             label: 'Cancel',
-            pressFunc: () => Get.back(),
+            pressFunc: () {
+              Get.back();
+             
+            },
           )
         ],
         scrollable: true,
+      
       ),
     );
   }

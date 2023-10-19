@@ -60,7 +60,7 @@ class _ListGuestState extends State<ListGuest> {
             ),
             body: appController.guestModels.isEmpty
                 ? const SizedBox()
-                : ListView.builder(
+                : ListView.builder(reverse: true,
                     itemCount: appController.guestModels.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () {

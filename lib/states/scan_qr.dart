@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:checkofficer/states/detail_after_scan.dart';
+import 'package:checkofficer/utility/app_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scan/scan.dart';
@@ -34,7 +35,9 @@ class _ScanQrState extends State<ScanQr> {
         controller: scanController,
         onCapture: (data) {
           print('data ---> $data');
-          Get.offAll(DetailAfterScan(qr: data));
+          AppDialog(context: context).normalDialog(title: 'Check Out Success');
+          // Get.back();
+          // Get.offAll(DetailAfterScan(qr: data));
         },
       ),
     );

@@ -34,43 +34,38 @@ class Detail extends StatelessWidget {
                       ? Colors.green
                       : Colors.red,
                   pressFunc: () {
-
-
-
                     if (!appController.connectedPrinter.value) {
-  AppDialog(context: context).normalDialog(
-    title: 'Connected Printer',
-    contentWidget: appController
-            .availableBluetoothDevices.isEmpty
-        ? const WidgetText(data: 'ไม่มี Printer')
-        : SizedBox(
-            height: 100,
-            width: 250,
-            child: ListView.builder(
-              physics: const ScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: appController
-                  .availableBluetoothDevices.length,
-              itemBuilder: (context, index) => WidgetButton(
-                label: appController
-                    .availableBluetoothDevices[index]
-                    .toString(),
-                pressFunc: () {
-                  AppService()
-                      .processChoosePrinter(
-                          printerName: appController
-                                  .availableBluetoothDevices[
-                              index])
-                      .then((value) => Get.back());
-                },
-              ),
-            ),
-          ),
-  );
-}
-
-
-
+                      
+                      AppDialog(context: context).normalDialog(
+                        title: 'Connected Printer',
+                        contentWidget: appController
+                                .availableBluetoothDevices.isEmpty
+                            ? const WidgetText(data: 'ไม่มี Printer')
+                            : SizedBox(
+                                height: 100,
+                                width: 250,
+                                child: ListView.builder(
+                                  physics: const ScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: appController
+                                      .availableBluetoothDevices.length,
+                                  itemBuilder: (context, index) => WidgetButton(
+                                    label: appController
+                                        .availableBluetoothDevices[index]
+                                        .toString(),
+                                    pressFunc: () {
+                                      AppService()
+                                          .processChoosePrinter(
+                                              printerName: appController
+                                                      .availableBluetoothDevices[
+                                                  index])
+                                          .then((value) => Get.back());
+                                    },
+                                  ),
+                                ),
+                              ),
+                      );
+                    }
                   },
                 ),
                 // WidgetIconButton(
@@ -111,7 +106,8 @@ class Detail extends StatelessWidget {
                               'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${guestModel.id}'),
                       Container(
                         margin: const EdgeInsets.only(top: 16, bottom: 64),
-                        child: const WidgetText(data: 'Title : ข้อมูลปิดท้ายสลิป'),
+                        child:
+                            const WidgetText(data: 'Title : ข้อมูลปิดท้ายสลิป'),
                       ),
                     ],
                   ),
