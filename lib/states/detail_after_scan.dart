@@ -35,7 +35,7 @@ class _DetailAfterScanState extends State<DetailAfterScan> {
 
   Future<void> processCheckOut() async {
     String url =
-        'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/editCheckOutWhereId.php?isAdd=true&id=${widget.qr}&checkOut=${DateTime.now().toString()}';
+        'https://tswg.site/app/editCheckOutWhereId.php?isAdd=true&id=${widget.qr}&checkOut=${DateTime.now().toString()}';
 
     await Dio().get(url).then((value) {
       findGuestModel();
@@ -44,7 +44,7 @@ class _DetailAfterScanState extends State<DetailAfterScan> {
 
   Future<void> findGuestModel() async {
     String url =
-        'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/getGuestWhereId.php?isAdd=true&id=${widget.qr}';
+        'https://tswg.site/app/getGuestWhereId.php?isAdd=true&id=${widget.qr}';
     await Dio().get(url).then((value) {
       if (value.toString() != 'null') {
         for (var element in json.decode(value.data)) {

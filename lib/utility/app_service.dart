@@ -70,6 +70,16 @@ class AppService {
               data: 'เวลาเข้า : ${guestModel.checkIn}',
               textStyle: AppConstant().h3Style(color: Colors.black, size: 8),
             ),
+
+            WidgetText(data: 'หมายเหตุ'),
+            Divider(),
+            Divider(),
+            Divider(),
+            Divider(),
+
+
+
+
             Container(
               margin: const EdgeInsets.symmetric(vertical: 16),
               width: 120,
@@ -91,7 +101,9 @@ class AppService {
 
       bytes += generator.qrcode(guestModel.id);
 
-      bytes += generator.text('\n\n Remark: \n\n\n');
+      bytes += generator.text('\n\n\n\n\n');
+
+     
 
       await BluetoothThermalPrinter.writeBytes(bytes);
     });
