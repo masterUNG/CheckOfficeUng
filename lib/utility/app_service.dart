@@ -121,7 +121,7 @@ class AppService {
 
   Future<void> readAllGuest() async {
     String urlApi =
-        'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/getAllGuest.php';
+        'https://tswg.site/app/getAllGuest.php';
 
     if (appController.guestModels.isNotEmpty) {
       appController.guestModels.clear();
@@ -142,7 +142,7 @@ class AppService {
       required String province,
       required String objective}) async {
     String urlApiUpload =
-        'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/saveFile.php';
+        'https://tswg.site/app/saveFile.php';
 
     var files = <File>[];
     if (appController.avatarFiles.isNotEmpty) {
@@ -173,14 +173,14 @@ class AppService {
         // urlImages.add(
         //     'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile');
         urlImages[index] =
-            'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile';
+            'https://tswg.site/app/image/$nameFile';
       });
       index++;
     }
 
     if (urlImages.isNotEmpty) {
       String urlApiInsertGuest =
-          'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/insertGuest.php?isAdd=true&nameAndSur=$nameAndSurname&phone=$phone&carId=$carId&province=$province&objective=$objective&urlImage1=${urlImages[0]}&urlImage2=${urlImages[1]}&urlImage3=${urlImages[2]}&checkIn=${DateTime.now().toString()}';
+          'https://tswg.site/app/insertGuest.php?isAdd=true&nameAndSur=$nameAndSurname&phone=$phone&carId=$carId&province=$province&objective=$objective&urlImage1=${urlImages[0]}&urlImage2=${urlImages[1]}&urlImage3=${urlImages[2]}&checkIn=${DateTime.now().toString()}';
       await dio.Dio().get(urlApiInsertGuest).then((value) {
         Get.back();
         AppSnackBar(
@@ -199,7 +199,7 @@ class AppService {
 
   Future<void> readAllObjective() async {
     String urlApi =
-        'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/getAllObjectiveUng.php';
+        'https://tswg.site/app/getAllObjectiveUng.php';
     await dio.Dio().get(urlApi).then((value) {
       for (var element in json.decode(value.data)) {
         ObjectiveModel model = ObjectiveModel.fromMap(element);
