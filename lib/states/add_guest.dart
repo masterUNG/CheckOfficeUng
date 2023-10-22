@@ -29,6 +29,11 @@ class _AddGuestState extends State<AddGuest> {
     super.initState();
     AppService().readAllProvince();
     AppService().readAllObjective();
+
+    if (controller.cardFiles.isNotEmpty) {
+      controller.cardFiles.clear();
+      
+    }
   }
 
   @override
@@ -54,54 +59,19 @@ class _AddGuestState extends State<AddGuest> {
             print('avatarFiles --> ${appController.avatarFiles.length}');
             return ListView(
               children: [
-                appController.avatarFiles.isEmpty
-                    ? WidgetImage(
-                        pathImage: 'images/avatar.png',
-                        width: 200,
-                        height: 200,
-                        tapFunc: () async {
-                          await AppService().processTakePhoto().then((value) {
-                            appController.avatarFiles.add(value);
-                          });
-                        },
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          WidgetImageFile(
-                            file: appController.avatarFiles.last,
-                            size: 200,
-                          ),
-                        ],
-                      ),
+                // imageAvatar(appController),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    appController.carFiles.isEmpty
-                        ? WidgetImage(
-                            pathImage: 'images/car.png',
-                            width: 100,
-                            height: 100,
-                            tapFunc: () async {
-                              await AppService()
-                                  .processTakePhoto()
-                                  .then((value) {
-                                appController.carFiles.add(value);
-                              });
-                            },
-                          )
-                        : WidgetImageFile(
-                            file: appController.carFiles.last,
-                            size: 100,
-                          ),
-                    const SizedBox(
-                      width: 16,
-                    ),
+                    // imageCar(appController),
+                    // const SizedBox(
+                    //   width: 16,
+                    // ),
                     appController.cardFiles.isEmpty
                         ? WidgetImage(
                             pathImage: 'images/card.png',
-                            width: 100,
-                            height: 100,
+                            width: 200,
+                            height: 200,
                             tapFunc: () async {
                               await AppService()
                                   .processTakePhoto()
@@ -112,7 +82,7 @@ class _AddGuestState extends State<AddGuest> {
                           )
                         : WidgetImageFile(
                             file: appController.cardFiles.last,
-                            size: 100,
+                            size: 200,
                           ),
                   ],
                 ),
@@ -252,6 +222,47 @@ class _AddGuestState extends State<AddGuest> {
     );
   }
 
+  StatelessWidget imageCar(AppController appController) {
+    return appController.carFiles.isEmpty
+        ? WidgetImage(
+            pathImage: 'images/car.png',
+            width: 100,
+            height: 100,
+            tapFunc: () async {
+              await AppService().processTakePhoto().then((value) {
+                appController.carFiles.add(value);
+              });
+            },
+          )
+        : WidgetImageFile(
+            file: appController.carFiles.last,
+            size: 100,
+          );
+  }
+
+  Widget imageAvatar(AppController appController) {
+    return appController.avatarFiles.isEmpty
+        ? WidgetImage(
+            pathImage: 'images/avatar.png',
+            width: 200,
+            height: 200,
+            tapFunc: () async {
+              await AppService().processTakePhoto().then((value) {
+                appController.avatarFiles.add(value);
+              });
+            },
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              WidgetImageFile(
+                file: appController.avatarFiles.last,
+                size: 200,
+              ),
+            ],
+          );
+  }
+
   void processSave() {
     if (controller.cardFiles.isEmpty) {
       AppSnackBar(title: 'Image Card ?', message: 'กรุณาถ่ายภาพ Card')
@@ -262,14 +273,16 @@ class _AddGuestState extends State<AddGuest> {
     } else if (controller.chooseProvinces.last == null) {
       AppSnackBar(title: 'จังหวัด ?', message: 'กรุณาเลือก จังหวัดด้วย คะ')
           .errorSnackBar();
-    }  else {
+    } else {
       //process Insert
       AppService().processAddGuest(
           nameAndSurname: nameAndSurname ?? '',
           phone: phone ?? '',
           carId: carId!,
           province: controller.chooseProvinces.last!,
-          objective: controller.chooseObjectives.isEmpty ? '' : controller.chooseObjectives.last! );
+          objective: controller.chooseObjectives.isEmpty
+              ? ''
+              : controller.chooseObjectives.last!);
     }
   }
 }
