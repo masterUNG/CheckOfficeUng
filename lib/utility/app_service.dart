@@ -14,6 +14,7 @@ import 'package:checkofficer/utility/app_controller.dart';
 import 'package:checkofficer/utility/app_snackbar.dart';
 import 'package:checkofficer/widgets/widget_text.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -187,7 +188,7 @@ class AppService {
         //     'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/image/$nameFile');
         urlImages[index] = 'https://tswg.site/app/image/$nameFile';
       });
-      index++;  
+      index++;
     }
 
     if (urlImages.isNotEmpty) {
@@ -226,6 +227,27 @@ class AppService {
         ProvinceModel model = ProvinceModel.fromMap(element);
         appController.provinceModels.add(model);
       }
+    });
+  }
+
+  Future<void> processFindGuestModel({required String dataScan}) async {
+    String urlApiEdit =
+        'https://tswg.site/app/editCheckOutWhereId.php?isAdd=true&id=$dataScan&checkOut=${DateTime.now().toString()}';
+
+    await Dio().get(urlApiEdit).then((value) async {
+      String url =
+          'https://tswg.site/app/getGuestWhereId.php?isAdd=true&id=$dataScan';
+
+      await Dio().get(url).then((value) {
+        if (value.toString() != 'null') {
+          for (var element in json.decode(value.data)) {
+            // guestModel = GuestModel.fromMap(element);
+            // setState(() {});
+            GuestModel guestModel = GuestModel.fromMap(element);
+            appController.qrGuestModels.add(guestModel);
+          }
+        }
+      });
     });
   }
 }

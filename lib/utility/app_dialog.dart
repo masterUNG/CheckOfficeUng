@@ -10,23 +10,30 @@ class AppDialog {
     required this.context,
   });
 
-  void normalDialog({required String title, Widget? contentWidget}) {
+  void normalDialog({
+    required String title,
+    Widget? iconWidget,
+    Widget? contentWidget,
+    Widget? actionWidget,
+  }) {
     Get.dialog(
       AlertDialog(
+        icon: iconWidget,
         title: WidgetText(data: title),
         content: contentWidget,
         actions: [
-          WidgetTextButton(
-            label: 'Cancel',
-            pressFunc: () {
-              Get.back();
-             
-            },
-          )
+          actionWidget ??
+              WidgetTextButton(
+                label: 'Cancel',
+                pressFunc: () {
+                  Get.back();
+                },
+              )
         ],
         scrollable: true,
-      
+        
       ),
+      barrierDismissible: false,
     );
   }
 }

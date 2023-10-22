@@ -18,4 +18,6 @@ class AppController extends GetxController {
 
   RxBool connectedPrinter = false.obs;
   RxList<dynamic> availableBluetoothDevices = <dynamic>[].obs;
+
+  RxList<GuestModel> qrGuestModels = <GuestModel>[].obs;
 }

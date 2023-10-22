@@ -58,19 +58,7 @@ class _DetailAfterScanState extends State<DetailAfterScan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: WidgetText(
-          data: 'D-FREND Solution',
-          textStyle: AppConstant().h2Style(),
-        ),
-        leading: WidgetIconButton(
-          iconData: Icons.arrow_back,
-          pressFunc: () {
-            Get.offAll(const ListGuest());
-          },
-        ),
-      ),
+      appBar: mainAppBar(),
       body: guestModel == null
           ? const SizedBox()
           : SizedBox(
@@ -100,6 +88,22 @@ class _DetailAfterScanState extends State<DetailAfterScan> {
                 ],
               ),
             ),
+    );
+  }
+
+  AppBar mainAppBar() {
+    return AppBar(
+      centerTitle: true,
+      title: WidgetText(
+        data: 'D-FREND Solution',
+        textStyle: AppConstant().h2Style(),
+      ),
+      leading: WidgetIconButton(
+        iconData: Icons.arrow_back,
+        pressFunc: () {
+          Get.offAll(const ListGuest());
+        },
+      ),
     );
   }
 }
