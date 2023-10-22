@@ -28,7 +28,8 @@ class _AuthenState extends State<Authen> {
     return Scaffold(
       body: Container(
         decoration: AppConstant().imageBox(),
-        child: GestureDetector(onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: ListView(
             children: [
               Row(
@@ -39,7 +40,6 @@ class _AuthenState extends State<Authen> {
                     margin: const EdgeInsets.only(top: 64),
                     child: const WidgetImage(
                       pathImage: 'images/logo_tswg.png',
-                     
                     ),
                   ),
                 ],
@@ -89,11 +89,12 @@ class _AuthenState extends State<Authen> {
                               'https://www.androidthai.in.th/fluttertraining/checeOffocerUng/getUserWhereUser.php?isAdd=true&user=$user';
                           await Dio().get(urlApi).then((value) {
                             print('value ---> $value');
-        
+
                             if (value.toString() == 'null') {
                               AppSnackBar(
                                       title: 'User False',
-                                      message: 'ไม่มี $user คนนี้ใน ฐานข้อมูลเรา')
+                                      message:
+                                          'ไม่มี $user คนนี้ใน ฐานข้อมูลเรา')
                                   .errorSnackBar();
                             } else {
                               for (var element in json.decode(value.data)) {
@@ -103,7 +104,8 @@ class _AuthenState extends State<Authen> {
                                   //Password true
                                   AppSnackBar(
                                           title: 'Welcome',
-                                          message: 'Welcome ${model.name} to App')
+                                          message:
+                                              'Welcome ${model.name} to App')
                                       .normalSnackBar();
                                   Get.offAll(const ListGuest());
                                 } else {
